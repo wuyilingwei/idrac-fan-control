@@ -1,0 +1,36 @@
+# 配置 / 凭据(明文,见 PLAN.md §6)
+config.json
+*.secrets.*
+
+# agents/ 是 agent-mode 工作流的内部追溯目录(task_plan/progress/findings + File Guard snapshots)
+# 含 R730 测试凭据与 File Guard config.json 快照 — 一律不入 git
+agents/
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+venv/
+env/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# 打包产物
+build/
+dist/
+*.spec.bak
+
+# 前端
+frontend/node_modules/
+frontend/dist/
+# 注:app/static/ 不再排除 — 前端 build 产物随 release commit 入 git
+# (workflow 只做 PyInstaller + Release,不再 build frontend)
+
+# IDE / OS
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
+test/

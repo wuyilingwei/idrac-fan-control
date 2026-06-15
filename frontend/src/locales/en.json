@@ -1,0 +1,117 @@
+{
+  "app": {
+    "title": "iDRAC Fan Control",
+    "tabs": {
+      "status": "Status",
+      "devices": "Devices",
+      "curves": "Curves",
+      "settings": "Settings",
+      "notifiers": "Notifiers"
+    },
+    "language": "Language"
+  },
+  "login": {
+    "hint": "Enter master password to continue",
+    "password_placeholder": "Master password",
+    "submit": "Sign in",
+    "logout": "Sign out"
+  },
+  "common": {
+    "save": "Save",
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "edit": "Edit",
+    "add": "Add",
+    "test": "Test",
+    "loading": "Loading…",
+    "error": "Error",
+    "yes": "Yes",
+    "no": "No",
+    "auto": "Auto",
+    "manual": "Manual",
+    "none": "None"
+  },
+  "status": {
+    "title": "Live Status",
+    "device": "Device",
+    "temp": "Temp",
+    "target_pct": "Target Fan %",
+    "tick_status": "Status",
+    "no_data": "No data yet — waiting first tick",
+    "refresh": "Refresh"
+  },
+  "devices": {
+    "title": "Devices",
+    "id": "ID",
+    "name": "Name",
+    "host": "Host",
+    "user": "User",
+    "password": "Password",
+    "backend": "Backend",
+    "verify_tls": "Verify TLS",
+    "probe": "Probe",
+    "fan_manual": "Fan Manual",
+    "fan_auto": "Fan Auto",
+    "pct_input": "Percent (0-100)",
+    "warn_plaintext": "⚠ Password stored as plaintext — do not commit to public git",
+    "model": "Model",
+    "idrac_label": "iDRAC",
+    "host_os": "Host OS",
+    "temp_strategy": "Temperature Aggregation",
+    "strategy_max": "Max",
+    "strategy_avg": "Avg",
+    "refresh_sensors": "Refresh sensors",
+    "participating_sensors_hint": "Sensors participating in the calculation (empty = all; checked = only these). Aggregated by the strategy above.",
+    "sensors_unavailable": "Could not fetch sensor list — confirm device is connected and backend is running"
+  },
+  "curves": {
+    "title": "Curves",
+    "id": "ID",
+    "name": "Name",
+    "mode": "Mode",
+    "mode_step": "Step",
+    "mode_linear": "Linear",
+    "points": "Points",
+    "add_point": "+ Add Point",
+    "temp_col": "Temp (°C)",
+    "pct_col": "Fan (%)"
+  },
+  "assignments": {
+    "title": "Curve Assignments",
+    "device": "Device",
+    "curve": "Current Curve",
+    "set": "Set",
+    "remove": "Remove"
+  },
+  "settings": {
+    "title": "Settings",
+    "failsafe_enabled": "Failsafe Enabled",
+    "failsafe_temp_c": "Failsafe Temp Threshold (°C)",
+    "poll_interval_s": "Poll Interval (s)",
+    "autostart": "Autostart at Boot",
+    "restore_on_exit": "Restore Auto Mode on Exit",
+    "language": "Language",
+    "lang_auto": "Auto (follow system)",
+    "lang_zh": "中文",
+    "lang_en": "English",
+    "security_title": "Authentication & Bind",
+    "no_pw_warn": "⚠ No master password set — service forced to listen on 127.0.0.1 only. Set a master password to allow other bind addresses.",
+    "master_password": "Master password",
+    "master_password_placeholder": "Empty = auth disabled",
+    "bind_host": "Bind address",
+    "bind_host_hint": "Default 127.0.0.1 (localhost only). Changing bind_host requires service restart; field is locked when no master password is set."
+  },
+  "notifiers": {
+    "title": "Notifiers",
+    "id": "ID",
+    "type": "Type",
+    "enabled": "Enabled",
+    "events": "Subscribed Events",
+    "config": "Config (JSON)",
+    "type_telegram": "Telegram",
+    "type_webhook": "Webhook",
+    "test_event": "Test Event",
+    "tg_token": "Bot Token",
+    "tg_chat_id": "Chat ID"
+  }
+}

@@ -1,0 +1,117 @@
+{
+  "app": {
+    "title": "iDRAC 风扇控制",
+    "tabs": {
+      "status": "状态",
+      "devices": "设备",
+      "curves": "曲线",
+      "settings": "设置",
+      "notifiers": "通知"
+    },
+    "language": "语言"
+  },
+  "login": {
+    "hint": "请输入主密码以继续",
+    "password_placeholder": "主密码",
+    "submit": "登入",
+    "logout": "登出"
+  },
+  "common": {
+    "save": "保存",
+    "cancel": "取消",
+    "delete": "删除",
+    "edit": "编辑",
+    "add": "新增",
+    "test": "测试",
+    "loading": "加载中…",
+    "error": "错误",
+    "yes": "是",
+    "no": "否",
+    "auto": "自动",
+    "manual": "手动",
+    "none": "无"
+  },
+  "status": {
+    "title": "实时状态",
+    "device": "设备",
+    "temp": "温度",
+    "target_pct": "目标转速",
+    "tick_status": "状态",
+    "no_data": "尚无数据,等待第一次轮询",
+    "refresh": "刷新"
+  },
+  "devices": {
+    "title": "设备",
+    "id": "ID",
+    "name": "名称",
+    "host": "主机",
+    "user": "用户",
+    "password": "密码",
+    "backend": "后端",
+    "verify_tls": "校验 TLS",
+    "probe": "探测",
+    "fan_manual": "手动转速",
+    "fan_auto": "交还自动",
+    "pct_input": "百分比 (0-100)",
+    "warn_plaintext": "⚠ 密码明文保存,请勿提交公开 git",
+    "model": "型号",
+    "idrac_label": "iDRAC",
+    "host_os": "宿主 OS",
+    "temp_strategy": "温度聚合策略",
+    "strategy_max": "最高值 (max)",
+    "strategy_avg": "平均值 (avg)",
+    "refresh_sensors": "刷新传感器",
+    "participating_sensors_hint": "参与计算的传感器(留空 = 全部参与;勾选 = 仅这些参与);最终用上面策略聚合",
+    "sensors_unavailable": "未能拉取传感器列表,请确认设备已连接 + 后端在跑"
+  },
+  "curves": {
+    "title": "曲线",
+    "id": "ID",
+    "name": "名称",
+    "mode": "模式",
+    "mode_step": "阶梯",
+    "mode_linear": "直线",
+    "points": "点",
+    "add_point": "+ 加点",
+    "temp_col": "温度 (°C)",
+    "pct_col": "转速 (%)"
+  },
+  "assignments": {
+    "title": "曲线分配",
+    "device": "设备",
+    "curve": "当前曲线",
+    "set": "设置",
+    "remove": "移除"
+  },
+  "settings": {
+    "title": "设置",
+    "failsafe_enabled": "Failsafe 开关",
+    "failsafe_temp_c": "Failsafe 温度阈值 (°C)",
+    "poll_interval_s": "轮询间隔 (秒)",
+    "autostart": "开机自启",
+    "restore_on_exit": "退出时交还自动控制",
+    "language": "语言",
+    "lang_auto": "自动 (跟随系统)",
+    "lang_zh": "中文",
+    "lang_en": "English",
+    "security_title": "鉴权与监听",
+    "no_pw_warn": "⚠ 当前无主密码 → 服务强制只监听本机 (127.0.0.1)。设主密码后可改 bind_host 监听其他地址。",
+    "master_password": "主密码",
+    "master_password_placeholder": "留空 = 关闭鉴权",
+    "bind_host": "监听地址",
+    "bind_host_hint": "默认 127.0.0.1 (仅本机访问)。修改 bind_host 需要重启服务生效;无主密码时该字段被强制锁定。"
+  },
+  "notifiers": {
+    "title": "通知器",
+    "id": "ID",
+    "type": "类型",
+    "enabled": "启用",
+    "events": "订阅事件",
+    "config": "配置 (JSON)",
+    "type_telegram": "Telegram",
+    "type_webhook": "Webhook",
+    "test_event": "测试事件",
+    "tg_token": "Bot Token",
+    "tg_chat_id": "Chat ID"
+  }
+}

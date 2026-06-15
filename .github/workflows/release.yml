@@ -1,0 +1,122 @@
+name: release
+
+# 仅在推 v*.*.* tag 时触发 — 只做"全平台发布",不做任何 frontend build / pytest 检查
+# (前端 build 由本地完成,app/static/* 已入 git 随 release commit)
+on:
+  push:
+    tags:
+      - 'v*.*.*'
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: '要打的 tag 名(例 v0.1.1)'
+        required: true
+        default: 'v0.1.1'
+
+permissions:
+  contents: write
+
+jobs:
+  # ============================================================
+  # 三平台 PyInstaller 并行打包
+  # ============================================================
+  build:
+    name: pyinstaller (${{ matrix.os }})
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: ubuntu-latest
+            artifact_name: idrac-fan-control-linux-x64
+            binary_name: idrac-fan-control
+            archive_ext: tar.gz
+          - os: macos-latest
+            artifact_name: idrac-fan-control-macos-arm64
+            binary_name: idrac-fan-control
+            archive_ext: tar.gz
+          - os: windows-latest
+            artifact_name: idrac-fan-control-windows-x64
+            binary_name: idrac-fan-control.exe
+            archive_ext: zip
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: pip
+
+      - name: pip install
+        run: |
+          pip install --upgrade pip
+          pip install -r requirements.txt pyinstaller
+
+      - name: pyinstaller
+        run: pyinstaller build.spec
+
+      - name: pack distribution (Linux / macOS)
+        if: matrix.os != 'windows-latest'
+        run: |
+          mkdir -p release-payload
+          cp dist/${{ matrix.binary_name }} release-payload/
+          cp README.md RELEASE_NOTES.md release-payload/ 2>/dev/null || true
+          cp -r scripts/install release-payload/install
+          cd release-payload
+          tar -czf ../${{ matrix.artifact_name }}.${{ matrix.archive_ext }} *
+
+      - name: pack distribution (Windows)
+        if: matrix.os == 'windows-latest'
+        shell: pwsh
+        run: |
+          New-Item -ItemType Directory -Path release-payload | Out-Null
+          Copy-Item dist/${{ matrix.binary_name }} release-payload/
+          Copy-Item README.md, RELEASE_NOTES.md release-payload/ -ErrorAction SilentlyContinue
+          Copy-Item -Recurse scripts/install release-payload/install
+          Compress-Archive -Path release-payload/* -DestinationPath ${{ matrix.artifact_name }}.${{ matrix.archive_ext }}
+
+      - name: upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ matrix.artifact_name }}
+          path: ${{ matrix.artifact_name }}.${{ matrix.archive_ext }}
+          if-no-files-found: error
+
+  # ============================================================
+  # 收集所有 artifact → 创建 GitHub Release
+  # ============================================================
+  release:
+    name: create release
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/download-artifact@v4
+        with:
+          path: dist-all
+          pattern: idrac-fan-control-*
+          merge-multiple: true
+
+      - name: list artifacts
+        run: ls -la dist-all/
+
+      - name: resolve tag name
+        id: tag
+        run: |
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            echo "name=${{ github.event.inputs.tag }}" >> "$GITHUB_OUTPUT"
+          else
+            echo "name=${GITHUB_REF#refs/tags/}" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: create release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ steps.tag.outputs.name }}
+          name: ${{ steps.tag.outputs.name }}
+          body_path: RELEASE_NOTES.md
+          draft: false
+          prerelease: false
+          files: dist-all/*
+          fail_on_unmatched_files: true

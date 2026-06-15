@@ -1,0 +1,17 @@
+[Unit]
+Description=iDRAC Fan Control (core service)
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+# {{INSTALL_DIR}} = 安装根 (会被 install.sh 替换);也可以手改这里
+WorkingDirectory={{INSTALL_DIR}}
+ExecStart={{INSTALL_DIR}}/idrac-fan-control --config {{INSTALL_DIR}}/config.json --host 127.0.0.1 --port 8080
+Restart=on-failure
+RestartSec=5
+# 明文 config.json 已 chmod 600 (PLAN §6); 系统级 unit 跑 root 也 OK,跑 user 同样可以
+# 内网部署假设;若暴露公网需加 hardening (PrivateTmp / NoNewPrivileges 等)
+
+[Install]
+WantedBy=default.target

@@ -1,0 +1,7 @@
+pyghmi==1.6.*
+httpx>=0.27,<0.29
+starlette>=0.40,<0.50
+uvicorn>=0.30,<0.40
+# 桌面入口 (app/desktop.py) — 无头机器跑核心服务不需要此包
+pywebview>=5.0,<6.0
+# 打包: pip install pyinstaller (开发期单独装,不进 requirements)

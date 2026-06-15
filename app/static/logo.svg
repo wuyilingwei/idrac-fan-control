@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="iDRAC Fan Control">
+  <!-- 主圆 (服务器机箱 / 风扇外壳) -->
+  <circle cx="32" cy="32" r="29" fill="#1f6feb"/>
+
+  <!-- 温度刻度短线 (12 短线代表风扇外圈格栅) -->
+  <g stroke="#fff" stroke-width="1.4" stroke-linecap="round" opacity="0.45">
+    <line x1="32" y1="5" x2="32" y2="9"/>
+    <line x1="45.5" y1="8.6" x2="43.5" y2="12.1"/>
+    <line x1="55.4" y1="18.5" x2="51.9" y2="20.5"/>
+    <line x1="59" y1="32" x2="55" y2="32"/>
+    <line x1="55.4" y1="45.5" x2="51.9" y2="43.5"/>
+    <line x1="45.5" y1="55.4" x2="43.5" y2="51.9"/>
+    <line x1="32" y1="59" x2="32" y2="55"/>
+    <line x1="18.5" y1="55.4" x2="20.5" y2="51.9"/>
+    <line x1="8.6" y1="45.5" x2="12.1" y2="43.5"/>
+    <line x1="5" y1="32" x2="9" y2="32"/>
+    <line x1="8.6" y1="18.5" x2="12.1" y2="20.5"/>
+    <line x1="18.5" y1="8.6" x2="20.5" y2="12.1"/>
+  </g>
+
+  <!-- 4 叶风扇(白色,水滴形,顺时针偏转给出旋转感) -->
+  <g transform="translate(32 32) rotate(20)" fill="#fff">
+    <path d="M 0 -23 Q 9 -18 5 -7 Q 0 -5 -5 -7 Q -9 -18 0 -23 Z"/>
+    <g transform="rotate(90)"><path d="M 0 -23 Q 9 -18 5 -7 Q 0 -5 -5 -7 Q -9 -18 0 -23 Z"/></g>
+    <g transform="rotate(180)"><path d="M 0 -23 Q 9 -18 5 -7 Q 0 -5 -5 -7 Q -9 -18 0 -23 Z"/></g>
+    <g transform="rotate(270)"><path d="M 0 -23 Q 9 -18 5 -7 Q 0 -5 -5 -7 Q -9 -18 0 -23 Z"/></g>
+  </g>
+
+  <!-- 轴心 -->
+  <circle cx="32" cy="32" r="5.5" fill="#1f6feb"/>
+  <circle cx="32" cy="32" r="5.5" fill="none" stroke="#fff" stroke-width="1.8"/>
+</svg>

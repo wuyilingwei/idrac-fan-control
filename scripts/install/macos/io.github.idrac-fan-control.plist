@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- macOS LaunchAgent — PLAN §9.
+     {{INSTALL_DIR}} 由 install.sh 替换为绝对路径.
+     ⚠️ 未签名二进制 (PLAN §12): 用户需先 `xattr -d com.apple.quarantine` 解除 Gatekeeper 隔离. -->
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>Label</key>
+    <string>io.github.idrac-fan-control</string>
+
+    <key>ProgramArguments</key>
+    <array>
+        <string>{{INSTALL_DIR}}/idrac-fan-control</string>
+        <string>--config</string>
+        <string>{{INSTALL_DIR}}/config.json</string>
+        <string>--host</string>
+        <string>127.0.0.1</string>
+        <string>--port</string>
+        <string>8080</string>
+    </array>
+
+    <key>WorkingDirectory</key>
+    <string>{{INSTALL_DIR}}</string>
+
+    <!-- 开机登录后自启,失败自动重启 -->
+    <key>RunAtLoad</key>
+    <true/>
+    <key>KeepAlive</key>
+    <dict>
+        <key>SuccessfulExit</key>
+        <false/>
+    </dict>
+
+    <key>StandardOutPath</key>
+    <string>{{INSTALL_DIR}}/logs/idrac-fan-control.out.log</string>
+    <key>StandardErrorPath</key>
+    <string>{{INSTALL_DIR}}/logs/idrac-fan-control.err.log</string>
+</dict>
+</plist>
